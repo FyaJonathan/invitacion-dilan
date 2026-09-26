@@ -1642,15 +1642,37 @@
                 padding: clamp(20px, 4vw, 28px);
             }
 
-            .countdown, .cards, .rsvp-actions, .modal-actions {
+            .countdown,
+            .cards,
+            .rsvp-actions,
+            .modal-actions {
                 min-width: 0;
             }
 
-            .timebox, .event-card, .btn, .attendance-card, .rsvp-card, .honey-modal, .panel, .hero-card {
+            .timebox,
+            .event-card,
+            .btn,
+            .attendance-card,
+            .rsvp-card,
+            .honey-modal,
+            .panel,
+            .hero-card {
                 min-width: 0;
             }
 
-            .event-card, .timebox, .btn, .lead, .quote, .tagline, .helper-note, .event-card p, .event-card a, .attendance-card small, .attendance-card strong, .status-box, td, th {
+            .event-card,
+            .timebox,
+            .btn,
+            .lead,
+            .quote,
+            .tagline,
+            .helper-note,
+            .event-card p,
+            .event-card a,
+            .attendance-card small,
+            .attendance-card strong,
+            .status-box,
+            td, th {
                 overflow-wrap: anywhere;
                 word-break: break-word;
             }
@@ -1676,7 +1698,8 @@
                     height: 150px;
                 }
 
-                .deco-right, .deco-right-2 {
+                .deco-right,
+                .deco-right-2 {
                     right: 0;
                     top: auto;
                     bottom: 32px;
@@ -1749,7 +1772,8 @@
                     opacity: .92;
                 }
 
-                .deco-right, .deco-right-2 {
+                .deco-right,
+                .deco-right-2 {
                     width: 104px;
                     height: 104px;
                     right: -8px;
@@ -1775,7 +1799,11 @@
                     bottom: -18px;
                 }
 
-                .comb.left, .comb.right, .sunflower.small, .sunflower.mini-left, .sunflower.mini-right {
+                .comb.left,
+                .comb.right,
+                .sunflower.small,
+                .sunflower.mini-left,
+                .sunflower.mini-right {
                     display: none;
                 }
 
@@ -1796,7 +1824,9 @@
                     padding: 15px 8px;
                 }
 
-                .cards, .rsvp-actions, .modal-actions {
+                .cards,
+                .rsvp-actions,
+                .modal-actions {
                     grid-template-columns: 1fr;
                     flex-direction: column;
                 }
@@ -1859,7 +1889,8 @@
                     font-size: 24px;
                 }
 
-                .modal-actions .btn, .btn {
+                .modal-actions .btn,
+                .btn {
                     padding: 13px 14px;
                 }
 
@@ -1868,6 +1899,245 @@
                     font-size: 14px;
                 }
             }
+
+
+
+            /* ===== MODAL RESPONSIVE + MUSICA ===== */
+            .honey-dialog {
+                width: 100vw;
+                max-width: 100vw;
+                height: 100dvh;
+                max-height: 100dvh;
+                margin: 0;
+                padding: max(10px, env(safe-area-inset-top)) 10px max(10px, env(safe-area-inset-bottom));
+                overflow: hidden;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .honey-dialog[open] {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .honey-modal {
+                width: min(520px, 100%);
+                max-width: 100%;
+                max-height: calc(100dvh - 20px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                padding: 26px 10px 10px;
+                overflow: visible;
+            }
+
+            .modal-honey-scene {
+                min-height: 0;
+                width: 100%;
+            }
+
+            .rsvp-card {
+                width: min(460px, 100%);
+                max-height: calc(100dvh - 42px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                overflow-y: auto;
+                overscroll-behavior: contain;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
+            }
+
+            .rsvp-card::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .rsvp-card::-webkit-scrollbar-thumb {
+                background: rgba(201, 145, 22, .35);
+                border-radius: 999px;
+            }
+
+            .music-toggle {
+                position: fixed;
+                right: max(14px, env(safe-area-inset-right));
+                bottom: calc(14px + env(safe-area-inset-bottom));
+                z-index: 80;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                min-width: 52px;
+                height: 52px;
+                padding: 0 15px;
+                border: 1px solid rgba(218, 169, 51, .72);
+                border-radius: 999px;
+                background: rgba(255, 250, 235, .94);
+                color: #654d2f;
+                font-weight: 800;
+                font-family: "DM Sans", system-ui, sans-serif;
+                box-shadow: 0 12px 30px rgba(67, 47, 20, .20);
+                backdrop-filter: blur(10px);
+                cursor: pointer;
+                transition: transform .2s ease, box-shadow .2s ease;
+            }
+
+            .music-toggle:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 16px 34px rgba(67, 47, 20, .24);
+            }
+
+            .music-toggle .music-label {
+                font-size: 13px;
+            }
+
+            @media (max-width: 640px) {
+                .honey-dialog {
+                    padding: max(8px, env(safe-area-inset-top)) 8px max(8px, env(safe-area-inset-bottom));
+                }
+
+                .honey-modal {
+                    width: 100%;
+                    max-height: calc(100dvh - 16px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                    padding: 22px 0 0;
+                }
+
+                .honey-modal::before,
+                .honey-modal::after,
+                .floating-dot,
+                .scene-bee {
+                    display: none;
+                }
+
+                .rsvp-card {
+                    width: min(440px, 100%);
+                    max-height: calc(100dvh - 30px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+                    padding: 36px 14px 14px;
+                    border-radius: 22px;
+                }
+
+                .honey-icon {
+                    width: 62px;
+                    height: 62px;
+                    top: -27px;
+                }
+
+                .honey-icon span {
+                    font-size: 29px;
+                }
+
+                .card-chip {
+                    margin-top: 0;
+                    margin-bottom: 9px;
+                    padding: 5px 10px;
+                    font-size: 11px;
+                }
+
+                .honey-modal h3 {
+                    font-size: clamp(27px, 8vw, 32px);
+                    margin-bottom: 7px;
+                }
+
+                .modal-intro {
+                    max-width: 330px;
+                    margin-bottom: 12px;
+                    font-size: 12.5px;
+                    line-height: 1.35;
+                }
+
+                .modal label {
+                    margin: 10px 0 5px;
+                }
+
+                .field {
+                    padding: 12px 13px;
+                    border-radius: 14px;
+                    font-size: 16px;
+                }
+
+                .section-divider {
+                    margin: 11px 0 7px;
+                }
+
+                .attendance-options {
+                    margin-top: 10px;
+                }
+
+                .attendance-options legend {
+                    margin-bottom: 6px;
+                }
+
+                .attendance-card {
+                    gap: 9px;
+                    margin: 7px 0 !important;
+                    padding: 10px 11px;
+                    border-radius: 16px;
+                }
+
+                .choice-icon {
+                    min-width: 42px;
+                    min-height: 42px;
+                    font-size: 20px;
+                    border-radius: 13px;
+                }
+
+                .attendance-card strong {
+                    font-size: 15px;
+                }
+
+                .attendance-card small {
+                    font-size: 11.5px;
+                }
+
+                .honey-modal .modal-actions {
+                    display: grid;
+                    grid-template-columns: .82fr 1.18fr;
+                    gap: 8px;
+                    margin-top: 12px;
+                }
+
+                .honey-modal .modal-actions .btn {
+                    width: 100%;
+                    padding: 12px 10px;
+                    font-size: 14px;
+                }
+
+                .privacy-note {
+                    display: none;
+                }
+
+                .music-toggle {
+                    width: 48px;
+                    min-width: 48px;
+                    height: 48px;
+                    padding: 0;
+                    right: 12px;
+                    bottom: calc(12px + env(safe-area-inset-bottom));
+                }
+
+                .music-toggle .music-label {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 360px), (max-height: 670px) {
+                .rsvp-card {
+                    padding-top: 32px;
+                }
+
+                .honey-modal h3 {
+                    font-size: 26px;
+                }
+
+                .modal-intro {
+                    display: none;
+                }
+
+                .attendance-card {
+                    padding: 8px 10px;
+                }
+
+                .choice-icon {
+                    min-width: 38px;
+                    min-height: 38px;
+                    font-size: 18px;
+                }
+            }
+
         </style>
     </head>
     <body>
@@ -2011,6 +2281,7 @@
                         <button class="btn primary" id="openRsvp">💚 Confirmar asistencia</button>
                         <button class="btn secondary" id="calendarBtn">📅 Agregar al calendario</button>
                     </div>
+                    <p class="helper-note">Si activas Google Sheets, podrás ver todas las confirmaciones en una sola lista real.</p>
                 </div>
             </section>
             <section class="section admin-panel" id="adminPanel" hidden>
@@ -2019,7 +2290,6 @@
                     <p class="lead">
                         Vista pensada para ti. Puedes abrir esta misma página con <strong>?admin=1</strong>
                         al final del enlace para revisar la lista.
-                    
                     
                     
                     </p>
@@ -2093,27 +2363,100 @@
                             <button type="button" class="btn ghost" id="closeRsvp">Cerrar</button>
                             <button type="submit" class="btn primary" id="submitRsvp">🐝 Confirmar</button>
                         </div>
+                        <p class="privacy-note">La confirmación se guarda en la lista de asistentes. Ya no es necesario que el invitado envíe un mensaje manualmente.</p>
                     </section>
                 </div>
             </form>
         </dialog>
         <div class="toast" id="toast">Listo</div>
+
+        <audio id="bgMusic" preload="metadata" loop playsinline>
+            <source src="musica.mp3" type="audio/mpeg">
+        </audio>
+        <button class="music-toggle" id="musicToggle" type="button" aria-label="Activar o pausar música" aria-pressed="false" title="Música">
+            <span id="musicIcon" aria-hidden="true">🎵</span>
+            <span class="music-label" id="musicLabel">Música</span>
+        </button>
+
         <script>
             // ===== DATOS RÁPIDOS PARA EDITAR =====
             const EVENT_DATE = new Date('2026-11-21T12:00:00-06:00');
 
-            const CEREMONY_MAP_URL = 'https://maps.app.goo.gl/wM2F4GhiFtcRQuVq9';
+            const CEREMONY_MAP_URL =
+            'https://maps.app.goo.gl/wM2F4GhiFtcRQuVq9';
 
-            const RECEPTION_MAP_URL = 'https://maps.app.goo.gl/u1yVPbj1hrcwrzEy7';
+            const RECEPTION_MAP_URL =
+            'https://maps.app.goo.gl/u1yVPbj1hrcwrzEy7';
 
             const STORAGE_KEY = 'dilanAdaelConfirmations';
 
             // Google Sheets
-            const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx6tBZisKK0GnjNHGjMfp2mROanf71wdfHsXPGuzxfuiQNov6Io1VYfFwCfo6_l2V39/exec';
+            const RSVP_ENDPOINT =
+            'https://script.google.com/macros/s/AKfycbx6tBZisKK0GnjNHGjMfp2mROanf71wdfHsXPGuzxfuiQNov6Io1VYfFwCfo6_l2V39/exec';
             // =====================================
 
             const $ = (s) => document.querySelector(s);
             const isAdminView = new URLSearchParams(window.location.search).get('admin') === '1';
+
+            // ===== MUSICA DE FONDO =====
+            const bgMusic = $('#bgMusic');
+            const musicToggle = $('#musicToggle');
+            const musicIcon = $('#musicIcon');
+            const musicLabel = $('#musicLabel');
+            let musicEnabled = true;
+
+            bgMusic.volume = 0.38;
+
+            function refreshMusicButton() {
+                const playing = !bgMusic.paused && !bgMusic.ended;
+                musicIcon.textContent = playing ? '🔊' : '🎵';
+                musicLabel.textContent = playing ? 'Sonando' : 'Música';
+                musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
+                musicToggle.title = playing ? 'Pausar música' : 'Reproducir música';
+            }
+
+            async function tryStartMusic() {
+                if (!musicEnabled || !bgMusic.paused)
+                    return;
+                try {
+                    await bgMusic.play();
+                    refreshMusicButton();
+                } catch (_) {
+                    // iOS/Android pueden exigir un toque explícito del usuario.
+                }
+            }
+
+            musicToggle.addEventListener('click', async (event) => {
+                event.stopPropagation();
+                if (bgMusic.paused) {
+                    musicEnabled = true;
+                    await tryStartMusic();
+                } else {
+                    musicEnabled = false;
+                    bgMusic.pause();
+                    refreshMusicButton();
+                }
+            });
+
+            // Primer toque dentro de la invitación: intenta iniciar la música.
+            const startMusicOnFirstInteraction = async (event) => {
+                if (event.target.closest('#musicToggle'))
+                    return;
+                await tryStartMusic();
+                if (!bgMusic.paused) {
+                    document.removeEventListener('pointerdown', startMusicOnFirstInteraction);
+                    document.removeEventListener('touchstart', startMusicOnFirstInteraction);
+                }
+            };
+
+            document.addEventListener('pointerdown', startMusicOnFirstInteraction, { passive: true });
+            document.addEventListener('touchstart', startMusicOnFirstInteraction, { passive: true });
+            bgMusic.addEventListener('play', refreshMusicButton);
+            bgMusic.addEventListener('pause', refreshMusicButton);
+            bgMusic.addEventListener('ended', refreshMusicButton);
+            refreshMusicButton();
+            // ============================
+
 
             function updateCountdown() {
                 const diff = Math.max(0, EVENT_DATE - new Date());
@@ -2302,18 +2645,35 @@
             );
 
             $('#calendarBtn').addEventListener('click', () => {
-                const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Dilan Adael//Invitacion//ES\nBEGIN:VEVENT\nUID:dilan-adael-misa-20261121@example.com\nDTSTAMP:20260926T180000Z\nDTSTART:20261121T120000\nDTEND:20261121T130000\nSUMMARY:Misa - Bautizo de Dilan Adael\nLOCATION:${CEREMONY_MAP_URL}\nDESCRIPTION:Misa de bautizo de Dilan Adael.\nEND:VEVENT\nBEGIN:VEVENT\nUID:dilan-adael-evento-20261121@example.com\nDTSTAMP:20260926T180000Z\nDTSTART:20261121T143000\nSUMMARY:Cumpleaños de Dilan Adael\nLOCATION:${RECEPTION_MAP_URL}\nDESCRIPTION:Evento y convivencia por el cumpleaños de Dilan Adael.\nEND:VEVENT\nEND:VCALENDAR`;
-                const blob = new Blob([ics],{
-                    type: 'text/calendar;charset=utf-8'
-                });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'Dilan-Adael-21-Noviembre.ics';
-                a.click();
-                setTimeout( () => URL.revokeObjectURL(url), 1000);
-            }
-            );
+                const ua = navigator.userAgent || '';
+                const isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+                const isAndroid = /Android/i.test(ua);
+
+                // Android: abre Google Calendar con los datos ya llenados.
+                if (isAndroid) {
+                    const params = new URLSearchParams({
+                        action: 'TEMPLATE',
+                        text: 'Bautizo y cumpleaños de Dilan Adael',
+                        dates: '20261121T120000/20261121T180000',
+                        ctz: 'America/Mexico_City',
+                        details: '12:00 PM · Misa de bautizo\n2:30 PM · Evento y convivencia\n\nCeremonia: ' + CEREMONY_MAP_URL + '\nRecepción: ' + RECEPTION_MAP_URL,
+                        location: 'Ceremonia y recepción · consulta las ubicaciones dentro de la invitación'
+                    });
+                    window.location.href = 'https://calendar.google.com/calendar/render?' + params.toString();
+                    return;
+                }
+
+                // iPhone/iPad: Safari/Brave entregará el archivo al calendario del sistema.
+                // En PC también funciona con Outlook, Apple Calendar y otros calendarios compatibles.
+                const calendarFile = 'evento-dilan.ics';
+
+                if (isIOS) {
+                    window.location.href = calendarFile;
+                    return;
+                }
+
+                window.open(calendarFile, '_blank', 'noopener');
+            });
 
             loadAdminView();
         </script>
