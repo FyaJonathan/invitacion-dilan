@@ -1642,37 +1642,15 @@
                 padding: clamp(20px, 4vw, 28px);
             }
 
-            .countdown,
-            .cards,
-            .rsvp-actions,
-            .modal-actions {
+            .countdown, .cards, .rsvp-actions, .modal-actions {
                 min-width: 0;
             }
 
-            .timebox,
-            .event-card,
-            .btn,
-            .attendance-card,
-            .rsvp-card,
-            .honey-modal,
-            .panel,
-            .hero-card {
+            .timebox, .event-card, .btn, .attendance-card, .rsvp-card, .honey-modal, .panel, .hero-card {
                 min-width: 0;
             }
 
-            .event-card,
-            .timebox,
-            .btn,
-            .lead,
-            .quote,
-            .tagline,
-            .helper-note,
-            .event-card p,
-            .event-card a,
-            .attendance-card small,
-            .attendance-card strong,
-            .status-box,
-            td, th {
+            .event-card, .timebox, .btn, .lead, .quote, .tagline, .helper-note, .event-card p, .event-card a, .attendance-card small, .attendance-card strong, .status-box, td, th {
                 overflow-wrap: anywhere;
                 word-break: break-word;
             }
@@ -1698,8 +1676,7 @@
                     height: 150px;
                 }
 
-                .deco-right,
-                .deco-right-2 {
+                .deco-right, .deco-right-2 {
                     right: 0;
                     top: auto;
                     bottom: 32px;
@@ -1772,8 +1749,7 @@
                     opacity: .92;
                 }
 
-                .deco-right,
-                .deco-right-2 {
+                .deco-right, .deco-right-2 {
                     width: 104px;
                     height: 104px;
                     right: -8px;
@@ -1799,11 +1775,7 @@
                     bottom: -18px;
                 }
 
-                .comb.left,
-                .comb.right,
-                .sunflower.small,
-                .sunflower.mini-left,
-                .sunflower.mini-right {
+                .comb.left, .comb.right, .sunflower.small, .sunflower.mini-left, .sunflower.mini-right {
                     display: none;
                 }
 
@@ -1824,9 +1796,7 @@
                     padding: 15px 8px;
                 }
 
-                .cards,
-                .rsvp-actions,
-                .modal-actions {
+                .cards, .rsvp-actions, .modal-actions {
                     grid-template-columns: 1fr;
                     flex-direction: column;
                 }
@@ -1889,8 +1859,7 @@
                     font-size: 24px;
                 }
 
-                .modal-actions .btn,
-                .btn {
+                .modal-actions .btn, .btn {
                     padding: 13px 14px;
                 }
 
@@ -1899,8 +1868,6 @@
                     font-size: 14px;
                 }
             }
-
-
 
             /* ===== MODAL RESPONSIVE + MUSICA ===== */
             .honey-dialog {
@@ -1996,10 +1963,7 @@
                     padding: 22px 0 0;
                 }
 
-                .honey-modal::before,
-                .honey-modal::after,
-                .floating-dot,
-                .scene-bee {
+                .honey-modal::before, .honey-modal::after, .floating-dot, .scene-bee {
                     display: none;
                 }
 
@@ -2137,7 +2101,6 @@
                     font-size: 18px;
                 }
             }
-
         </style>
     </head>
     <body>
@@ -2281,7 +2244,6 @@
                         <button class="btn primary" id="openRsvp">💚 Confirmar asistencia</button>
                         <button class="btn secondary" id="calendarBtn">📅 Agregar al calendario</button>
                     </div>
-                    <p class="helper-note">Si activas Google Sheets, podrás ver todas las confirmaciones en una sola lista real.</p>
                 </div>
             </section>
             <section class="section admin-panel" id="adminPanel" hidden>
@@ -2290,6 +2252,7 @@
                     <p class="lead">
                         Vista pensada para ti. Puedes abrir esta misma página con <strong>?admin=1</strong>
                         al final del enlace para revisar la lista.
+                    
                     
                     
                     </p>
@@ -2331,10 +2294,6 @@
                     <span class="scene-bee bee-left" aria-hidden="true">🐝</span>
                     <span class="scene-bee bee-right" aria-hidden="true">🐝</span>
                     <section class="rsvp-card">
-                        <div class="honey-icon">
-                            <span>🐝</span>
-                        </div>
-                        <span class="card-chip">🐝 Dulce confirmación</span>
                         <h3>Confirma tu asistencia</h3>
                         <p class="modal-intro">Solo escribe tu nombre y elige si asistirás a la misa y al evento o únicamente al evento.</p>
                         <label for="guestName">Nombre</label>
@@ -2363,13 +2322,11 @@
                             <button type="button" class="btn ghost" id="closeRsvp">Cerrar</button>
                             <button type="submit" class="btn primary" id="submitRsvp">🐝 Confirmar</button>
                         </div>
-                        <p class="privacy-note">La confirmación se guarda en la lista de asistentes. Ya no es necesario que el invitado envíe un mensaje manualmente.</p>
                     </section>
                 </div>
             </form>
         </dialog>
         <div class="toast" id="toast">Listo</div>
-
         <audio id="bgMusic" preload="metadata" loop playsinline>
             <source src="musica.mp3" type="audio/mpeg">
         </audio>
@@ -2377,22 +2334,18 @@
             <span id="musicIcon" aria-hidden="true">🎵</span>
             <span class="music-label" id="musicLabel">Música</span>
         </button>
-
         <script>
             // ===== DATOS RÁPIDOS PARA EDITAR =====
             const EVENT_DATE = new Date('2026-11-21T12:00:00-06:00');
 
-            const CEREMONY_MAP_URL =
-            'https://maps.app.goo.gl/wM2F4GhiFtcRQuVq9';
+            const CEREMONY_MAP_URL = 'https://maps.app.goo.gl/wM2F4GhiFtcRQuVq9';
 
-            const RECEPTION_MAP_URL =
-            'https://maps.app.goo.gl/u1yVPbj1hrcwrzEy7';
+            const RECEPTION_MAP_URL = 'https://maps.app.goo.gl/u1yVPbj1hrcwrzEy7';
 
             const STORAGE_KEY = 'dilanAdaelConfirmations';
 
             // Google Sheets
-            const RSVP_ENDPOINT =
-            'https://script.google.com/macros/s/AKfycbx6tBZisKK0GnjNHGjMfp2mROanf71wdfHsXPGuzxfuiQNov6Io1VYfFwCfo6_l2V39/exec';
+            const RSVP_ENDPOINT = 'https://script.google.com/macros/s/AKfycbx6tBZisKK0GnjNHGjMfp2mROanf71wdfHsXPGuzxfuiQNov6Io1VYfFwCfo6_l2V39/exec';
             // =====================================
 
             const $ = (s) => document.querySelector(s);
@@ -2421,8 +2374,7 @@
                 try {
                     await bgMusic.play();
                     refreshMusicButton();
-                } catch (_) {
-                    // iOS/Android pueden exigir un toque explícito del usuario.
+                } catch (_) {// iOS/Android pueden exigir un toque explícito del usuario.
                 }
             }
 
@@ -2436,7 +2388,8 @@
                     bgMusic.pause();
                     refreshMusicButton();
                 }
-            });
+            }
+            );
 
             // Primer toque dentro de la invitación: intenta iniciar la música.
             const startMusicOnFirstInteraction = async (event) => {
@@ -2447,16 +2400,20 @@
                     document.removeEventListener('pointerdown', startMusicOnFirstInteraction);
                     document.removeEventListener('touchstart', startMusicOnFirstInteraction);
                 }
-            };
+            }
+            ;
 
-            document.addEventListener('pointerdown', startMusicOnFirstInteraction, { passive: true });
-            document.addEventListener('touchstart', startMusicOnFirstInteraction, { passive: true });
+            document.addEventListener('pointerdown', startMusicOnFirstInteraction, {
+                passive: true
+            });
+            document.addEventListener('touchstart', startMusicOnFirstInteraction, {
+                passive: true
+            });
             bgMusic.addEventListener('play', refreshMusicButton);
             bgMusic.addEventListener('pause', refreshMusicButton);
             bgMusic.addEventListener('ended', refreshMusicButton);
             refreshMusicButton();
             // ============================
-
 
             function updateCountdown() {
                 const diff = Math.max(0, EVENT_DATE - new Date());
@@ -2673,7 +2630,8 @@
                 }
 
                 window.open(calendarFile, '_blank', 'noopener');
-            });
+            }
+            );
 
             loadAdminView();
         </script>
