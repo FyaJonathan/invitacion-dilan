@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Dilan Adael//Invitacion//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:dilan-adael-misa-20261121@invitacion
+DTSTAMP:20260926T221700Z
+DTSTART;TZID=America/Mexico_City:20261121T120000
+DTEND;TZID=America/Mexico_City:20261121T130000
+SUMMARY:Misa - Bautizo de Dilan Adael
+DESCRIPTION:Misa de bautizo de Dilan Adael.
+URL:https://maps.app.goo.gl/wM2F4GhiFtcRQuVq9
+END:VEVENT
+BEGIN:VEVENT
+UID:dilan-adael-evento-20261121@invitacion
+DTSTAMP:20260926T221700Z
+DTSTART;TZID=America/Mexico_City:20261121T143000
+SUMMARY:Cumpleaños de Dilan Adael
+DESCRIPTION:Evento y convivencia por el cumpleaños de Dilan Adael.
+URL:https://maps.app.goo.gl/u1yVPbj1hrcwrzEy7
+END:VEVENT
+END:VCALENDAR
