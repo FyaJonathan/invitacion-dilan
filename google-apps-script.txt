@@ -1,0 +1,71 @@
+PASOS RÁPIDOS PARA TENER UNA LISTA CENTRAL EN GOOGLE SHEETS
+
+1) Crea una hoja de cálculo nueva en Google Sheets.
+2) Ve a Extensiones > Apps Script.
+3) Borra el contenido y pega este código:
+
+function doGet(e) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName('Asistentes');
+  if (!sheet) {
+    sheet = ss.insertSheet('Asistentes');
+    sheet.appendRow(['Fecha', 'Nombre', 'Asistencia']);
+  }
+
+  const action = e && e.parameter && e.parameter.action;
+  if (action === 'list') {
+    const values = sheet.getDataRange().getValues();
+    const items = values.slice(1).map(row => ({
+      fechaRegistro: row[0],
+      nombre: row[1],
+      asistencia: row[2]
+    }));
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ items: items }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName('Asistentes');
+  if (!sheet) {
+    sheet = ss.insertSheet('Asistentes');
+    sheet.appendRow(['Fecha', 'Nombre', 'Asistencia']);
+  }
+
+  const data = JSON.parse(e.postData.contents || '{}');
+  sheet.appendRow([
+    data.fechaRegistro || new Date().toISOString(),
+    data.nombre || '',
+    data.asistencia || ''
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ok' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+4) Guarda el proyecto.
+5) Haz clic en Implementar > Nueva implementación > Aplicación web.
+6) Ejecutar como: tú mismo.
+7) Acceso: Cualquier persona con el enlace.
+8) Copia la URL del Web App.
+9) En el archivo index.html, busca esta línea:
+   const RSVP_ENDPOINT = '';
+   y pega ahí la URL.
+10) Sube de nuevo el index.html a GitHub Pages.
+
+PARA VER TU LISTA:
+- Abre tu invitación agregando ?admin=1 al final del enlace.
+- Ejemplo:
+  https://fyajonathan.github.io/invitacion-dilan-adael/?admin=1
+
+IMPORTANTE:
+- Sin este paso, las confirmaciones solo se guardan en el dispositivo del invitado.
+- Con Google Sheets, todas las confirmaciones llegarán a una sola lista central.
