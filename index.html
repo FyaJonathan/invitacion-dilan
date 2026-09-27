@@ -2328,7 +2328,7 @@
             </form>
         </dialog>
         <div class="toast" id="toast">Listo</div>
-        <audio id="bgMusic" preload="metadata" loop playsinline>
+        <audio id="bgMusic" preload="auto" loop playsinline webkit-playsinline>
             <source src="musica.mp3" type="audio/mpeg">
         </audio>
         <button class="music-toggle" id="musicToggle" type="button" aria-label="Activar o pausar música" aria-pressed="false" title="Música">
@@ -2353,67 +2353,164 @@
             const isAdminView = new URLSearchParams(window.location.search).get('admin') === '1';
 
             // ===== MUSICA DE FONDO =====
+           // ===== MUSICA DE FONDO =====
             const bgMusic = $('#bgMusic');
             const musicToggle = $('#musicToggle');
             const musicIcon = $('#musicIcon');
             const musicLabel = $('#musicLabel');
+            
             let musicEnabled = true;
-
+            let musicUnlocked = false;
+            
             bgMusic.volume = 0.38;
-
+            
             function refreshMusicButton() {
                 const playing = !bgMusic.paused && !bgMusic.ended;
+            
                 musicIcon.textContent = playing ? '🔊' : '🎵';
-                musicLabel.textContent = playing ? 'Sonando' : 'Música';
-                musicToggle.setAttribute('aria-pressed', playing ? 'true' : 'false');
-                musicToggle.title = playing ? 'Pausar música' : 'Reproducir música';
+            
+                if (playing) {
+                    musicLabel.textContent = 'Sonando';
+                } else if (musicUnlocked) {
+                    musicLabel.textContent = 'Música';
+                } else {
+                    musicLabel.textContent = 'Activar música';
+                }
+            
+                musicToggle.setAttribute(
+                    'aria-pressed',
+                    playing ? 'true' : 'false'
+                );
+            
+                musicToggle.title = playing
+                    ? 'Pausar música'
+                    : 'Reproducir música';
             }
-
-            async function tryStartMusic() {
-                if (!musicEnabled || !bgMusic.paused)
+            
+            function playMusicFromGesture() {
+                if (!musicEnabled || !bgMusic.paused) {
                     return;
-                try {
-                    await bgMusic.play();
-                    refreshMusicButton();
-                } catch (_) {// iOS/Android pueden exigir un toque explícito del usuario.
+                }
+            
+                const playPromise = bgMusic.play();
+            
+                if (playPromise !== undefined) {
+                    playPromise
+                        .then(() => {
+                            musicUnlocked = true;
+                            refreshMusicButton();
+                        })
+                        .catch((error) => {
+                            console.log('El navegador bloqueó el audio:', error);
+                            refreshMusicButton();
+                        });
                 }
             }
-
-            musicToggle.addEventListener('click', async (event) => {
+            
+            
+            // BOTÓN DE MÚSICA
+            musicToggle.addEventListener('click', function(event) {
+            
+                event.preventDefault();
                 event.stopPropagation();
+            
                 if (bgMusic.paused) {
+            
                     musicEnabled = true;
-                    await tryStartMusic();
+            
+                    // IMPORTANTE:
+                    // play() ocurre directamente dentro del click
+                    // para que iPhone permita reproducirlo.
+                    playMusicFromGesture();
+            
                 } else {
+            
                     musicEnabled = false;
                     bgMusic.pause();
                     refreshMusicButton();
+            
                 }
-            }
-            );
-
-            // Primer toque dentro de la invitación: intenta iniciar la música.
-            const startMusicOnFirstInteraction = async (event) => {
-                if (event.target.closest('#musicToggle'))
+            });
+            
+            
+            // PRIMER TOQUE EN LA INVITACIÓN
+            function unlockMusicOnFirstClick(event) {
+            
+                // Si tocó directamente el botón de música,
+                // dejamos que su propio evento lo controle.
+                if (event.target.closest('#musicToggle')) {
                     return;
-                await tryStartMusic();
-                if (!bgMusic.paused) {
-                    document.removeEventListener('pointerdown', startMusicOnFirstInteraction);
-                    document.removeEventListener('touchstart', startMusicOnFirstInteraction);
+                }
+            
+                if (!musicUnlocked && bgMusic.paused) {
+            
+                    musicEnabled = true;
+            
+                    // Este play() también ocurre dentro
+                    // de una interacción real del usuario.
+                    playMusicFromGesture();
                 }
             }
-            ;
-
-            document.addEventListener('pointerdown', startMusicOnFirstInteraction, {
-                passive: true
+            
+            
+            // Para PC, Android y iPhone
+            document.addEventListener(
+                'click',
+                unlockMusicOnFirstClick,
+                true
+            );
+            
+            
+            // Extra para Safari/iPhone
+            document.addEventListener(
+                'touchend',
+                function(event) {
+            
+                    if (event.target.closest('#musicToggle')) {
+                        return;
+                    }
+            
+                    if (!musicUnlocked && bgMusic.paused) {
+            
+                        musicEnabled = true;
+                        playMusicFromGesture();
+            
+                    }
+            
+                },
+                true
+            );
+            
+            
+            // ACTUALIZAR BOTÓN
+            bgMusic.addEventListener('play', function() {
+                musicUnlocked = true;
+                refreshMusicButton();
             });
-            document.addEventListener('touchstart', startMusicOnFirstInteraction, {
-                passive: true
+            
+            bgMusic.addEventListener(
+                'pause',
+                refreshMusicButton
+            );
+            
+            bgMusic.addEventListener(
+                'ended',
+                refreshMusicButton
+            );
+            
+            
+            // SI EL ARCHIVO NO EXISTE
+            bgMusic.addEventListener('error', function() {
+            
+                musicIcon.textContent = '⚠️';
+                musicLabel.textContent = 'Audio';
+                musicToggle.title = 'No se pudo cargar musica.mp3';
+            
             });
-            bgMusic.addEventListener('play', refreshMusicButton);
-            bgMusic.addEventListener('pause', refreshMusicButton);
-            bgMusic.addEventListener('ended', refreshMusicButton);
+            
+            
             refreshMusicButton();
+            // ============================
             // ============================
 
             function updateCountdown() {
